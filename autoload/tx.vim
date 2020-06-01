@@ -51,6 +51,7 @@
     for item in map(l:targets, {->s:parse(v:val)})
 
       let l:vimCmd = exists('a:options.vimCmd') ? a:options.vimCmd : "edit"
+      call s:split(a:options)
       execute l:vimCmd item.name
 
       " カーソル移動
@@ -60,6 +61,19 @@
 
       echom 'tx: ' . l:vimCmd . ' ' . item.name
     endfor
+  endfunction
+
+  function! s:split(options) abort
+    if !exists('a:options.split')
+      return
+    endif
+
+    let l:opt = a:options.split
+    if l:opt =~ 'v[ertical]' 
+      vertical new
+    elseif l:opt =~ 'h[rizontal]'
+      split
+    endif
   endfunction
 
   function! s:parse(result) abort
