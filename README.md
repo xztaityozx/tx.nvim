@@ -15,7 +15,7 @@ Call `tx#start({cmds}, {options})` or call `tx#call({name})` after `tx#register(
 ## Configuration
 
 ### `{cmds}`
-`{cmds}` is list of commands. For example, if `{cmd}` is `[["ls","-1"], ["fzf"]]`, `tx` is converts it to `ls -1 | fzf`.
+`{cmds}` is list of commands. For example, if `{cmd}` is `[["ls","-1"], ["fzf"]]`, `tx` converts it to `ls -1 | fzf`.
 
 #### `[[::tx_arg::]]`
 If `[[::tx_arg::]]` appears in `{cmds}`, `tx` replaces it with the value entered from the Vim prompt(`input('tx >>> ')`).
