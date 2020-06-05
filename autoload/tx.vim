@@ -51,11 +51,13 @@
     for item in map(l:targets, {->s:parse(v:val)})
 
       let l:vimCmd = exists('a:options.vimCmd') ? a:options.vimCmd : "edit"
+      let l:cursorOpt = exists('a:options.cursor') ? a:options.cursor : "no"
       call s:split(a:options)
-      execute l:vimCmd item.name
 
-      " カーソル移動
-      if exists('a:options.cursor')
+      if l:cursorOpt == "no" 
+        execute l:vimCmd l:item.name . ':' . l:item.line
+      else
+        execute l:vimCmd l:item.name
         call cursor(l:item.line, (a:options.cursor == 'lc' ? l:item.column : 1))
       endif
 
