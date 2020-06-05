@@ -61,7 +61,7 @@
         call cursor(l:parsed.line, (a:options.cursor == 'lc' ? l:parsed.column : 1))
       endif
 
-      echom 'tx: ' . l:vimCmd . ' ' . item.name
+      echom 'tx: ' . l:vimCmd . ' ' . item
     endfor
   endfunction
 
