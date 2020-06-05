@@ -48,17 +48,17 @@
       return 
     endif
 
-    for item in map(l:targets, {->s:parse(v:val)})
-
+    for item in l:targets
       let l:vimCmd = exists('a:options.vimCmd') ? a:options.vimCmd : "edit"
       let l:cursorOpt = exists('a:options.cursor') ? a:options.cursor : "no"
       call s:split(a:options)
 
       if l:cursorOpt == "no" 
-        execute l:vimCmd l:item.name . ':' . l:item.line
+        execute l:vimCmd l:item
       else
-        execute l:vimCmd l:item.name
-        call cursor(l:item.line, (a:options.cursor == 'lc' ? l:item.column : 1))
+        let l:parsed = s:parse(l:item)
+        execute l:vimCmd l:parsed.name
+        call cursor(l:parsed.line, (a:options.cursor == 'lc' ? l:parsed.column : 1))
       endif
 
       echom 'tx: ' . l:vimCmd . ' ' . item.name
